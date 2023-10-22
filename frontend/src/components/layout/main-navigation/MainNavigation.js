@@ -1,8 +1,12 @@
 import classes from "./MainNavigation.module.scss";
-import { Link, NavLink } from "react-router-dom";
-import { FaShoppingCart, FaTimes } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useState } from "react";
+import {useDispatch,useSelector} from 'react-redux';
+import { authActions, logout } from "../../../store";
+import { UserName } from "../../../pages/profile/Profile";
+
 
 export const logo = (
   <div className={classes.logo}>
@@ -16,6 +20,21 @@ export const logo = (
 
 const MainNavigation = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [scrollPage,setScrollPage] = useState(false);
+
+  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+
+  const navigate =useNavigate();
+  const dispatch = useDispatch();
+
+  const fixedNavBar =()=>{
+    if(window.scrollY >50){
+      setScrollPage(true)
+    }else{
+      setScrollPage(false)
+    }
+  };
+  window.addEventListener('scroll',fixedNavBar)
 
   const toggleMenuHandler = () => {
     setShowMenu((currState) => !currState);
@@ -24,6 +43,12 @@ const MainNavigation = () => {
   const hideMenuHandler = () => {
     setShowMenu(false);
   };
+
+  const logOutUser =async ()=>{
+   await dispatch(logout());
+   await dispatch(authActions.RESET_AUTH()) 
+   navigate('/login')   
+  }
 
   const cart = (
     <span className={classes.cart}>
@@ -40,7 +65,7 @@ const MainNavigation = () => {
   };
 
   return (
-    <header>
+    <header className={scrollPage ? `${classes.fixed}`:""}>
       <div className={classes.header}>
         {logo}
         <nav
@@ -67,15 +92,27 @@ const MainNavigation = () => {
           </ul>
           <div className={classes["header-right"]}>
             <span className={classes.links}>
-              <NavLink to={"/login"} className={navDataHandler}>
+              
+              {!isLoggedIn && <NavLink to={"/login"} className={navDataHandler}>
                 Login
-              </NavLink>
-              <NavLink to={"/register"} className={navDataHandler}>
+              </NavLink>}              
+              
+              {isLoggedIn && <NavLink to={"/login"} className={navDataHandler}>
+                <FaUserCircle size={16} color="ff7722" /> <UserName />  
+              </NavLink>}
+
+              {!isLoggedIn && <NavLink to={"/register"} className={navDataHandler}>
                 Register
-              </NavLink>
-              <NavLink to={"/order-history"} className={navDataHandler}>
+              </NavLink>}
+
+
+             {isLoggedIn && <NavLink to={"/order-history"} className={navDataHandler}>
                 My Order
-              </NavLink>
+              </NavLink>}
+
+              {isLoggedIn && <Link to={"/"} onClick={logOutUser}>
+                Logout
+              </Link>}
             </span>
             {cart}
           </div>
