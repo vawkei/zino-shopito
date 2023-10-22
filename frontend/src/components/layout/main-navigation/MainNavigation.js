@@ -97,7 +97,7 @@ const MainNavigation = () => {
                 Login
               </NavLink>}              
               
-              {isLoggedIn && <NavLink to={"/login"} className={navDataHandler}>
+              {isLoggedIn && <NavLink to={"/profile"} className={navDataHandler}>
                 <FaUserCircle size={16} color="ff7722" /> <UserName />  
               </NavLink>}
 
