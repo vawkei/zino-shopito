@@ -34,7 +34,7 @@ const MainFooter = () => {
     day =  days[day]
 
     let year = date.getFullYear()
-    console.log(`${day} ${date.getDate()} ${month}, ${year}`)
+    //console.log(`${day} ${date.getDate()} ${month}, ${year}`)
     const dateInFull = `${day} ${date.getDate()} ${month}, ${year}`
     return ( 
         <div className={classes.footer}>

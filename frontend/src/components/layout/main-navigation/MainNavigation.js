@@ -89,6 +89,11 @@ const MainNavigation = () => {
                 Shop
               </NavLink>
             </li>
+            <li>
+              <NavLink to={"/admin/home"} className={navDataHandler}>
+                | Admin
+              </NavLink>
+            </li>
           </ul>
           <div className={classes["header-right"]}>
             <span className={classes.links}>
@@ -97,7 +102,7 @@ const MainNavigation = () => {
                 Login
               </NavLink>}              
               
-              {isLoggedIn && <NavLink to={"/profile"} className={navDataHandler}>
+              {isLoggedIn && <NavLink to={"/profile"}>
                 <FaUserCircle size={16} color="ff7722" /> <UserName />  
               </NavLink>}
 

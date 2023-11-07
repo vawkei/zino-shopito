@@ -10,26 +10,20 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
-const register = require("./routes/userRoute");
-const login = require("./routes/userRoute");
-const logout = require("./routes/userRoute");
-const getUser = require("./routes/userRoute");
-const updateUser = require("./routes/userRoute")
-const updatePhoto = require("./routes/userRoute")
 
-const createProduct = require("./routes/productRoute");
-const getProducts = require("./routes/productRoute");
-const getSingleProduct = require("./routes/productRoute");
-const deleteProduct = require("./routes/productRoute");
-const updateProduct = require("./routes/productRoute");
-
-const reviewProduct = require("./routes/productRoute");
-const deleteReview = require("./routes/productRoute");
-const updateReview = require("./routes/productRoute");
+const userRoute = require("./routes/userRoute");
+// const login = require("./routes/userRoute");
+// const logout = require("./routes/userRoute");
+// const getUser = require("./routes/userRoute");
+// const updateUser = require("./routes/userRoute")
+// const updatePhoto = require("./routes/userRoute")
+const productRoute = require("./routes/productRoute");
+const categoryRoute  = require("./routes/categoryRoute");
+const brandRoute = require("./routes/brandRoute");
+const couponRoute =require("./routes/couponRoute");
+const orderRoute =require("./routes/orderRoute");
 
 const errorHandlerMiddleware = require("./middlewares/error-handler");
-
-
 
 
 //middlewares:
@@ -45,35 +39,17 @@ app.use(cors({
 
 
 
-//user routes:
+//Routes:
 app.get("/", (req, res) => {
   res.send("<h1>It's on baby</h1>");
 });
 
-app.use("/api/v1/auth",register);
-
-app.use("/api/v1/auth",login);
-
-app.use("/api/v1/auth/",logout)
-
-app.use("/api/v1/auth/",getUser),
-
-app.use("/api/v1/auth",updateUser),
-
-app.use("/api/v1/auth",updatePhoto),
-
-
-
-//product routes:
-app.use("/api/v1/products",createProduct)
-app.use("/api/v1/products",getProducts)
-app.use("/api/v1/products",getSingleProduct)
-app.use("/api/v1/products",deleteProduct);
-app.use("/api/v1/products",updateProduct);
-
-app.use("/api/v1/products",reviewProduct);
-app.use("/api/v1/products",deleteReview)
-app.use("/api/v1/products",updateReview);
+app.use("/api/v1/auth",userRoute);
+app.use("/api/v1/products",productRoute);
+app.use("/api/v1/category",categoryRoute);
+app.use("/api/v1/brand",brandRoute);
+app.use("/api/v1/coupon",couponRoute);
+app.use("/api/v1/order",orderRoute)
 
 app.use(errorHandlerMiddleware)
 

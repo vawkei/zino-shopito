@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+//const { default: mongoose } = require("mongoose");
 const Product = require("../models/products");
 
 // Create product:
@@ -197,7 +197,7 @@ const deleteReview = async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-  res.send("<h1>Delete review route</h1>");
+  //res.send("<h1>Delete review route</h1>");
 };
 
 //Update review :
