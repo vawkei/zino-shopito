@@ -5,6 +5,8 @@ import Loader from "../../loader/Loader";
 import ProductForm from "../productForm/ProductForm";
 import { createProduct } from "../../../store/products/productIndex";
 import { useNavigate } from "react-router-dom";
+import { productActions } from "../../../store/products/productIndex";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -24,7 +26,7 @@ const AddProduct = () => {
     product;
   const [description,setDescription] = useState("");
   const [files,setFiles] = useState([]);
-  const { isLoading } = useSelector((state) => state.product);
+  const { isLoading,message } = useSelector((state) => state.product);
 
   const  brands  = useSelector((state) => state.brand.brands);
   //console.log(brands);
@@ -48,6 +50,11 @@ const AddProduct = () => {
     const saveProduct = async (e) => {
         e.preventDefault();
         
+        if(files.length < 1){
+          toast.error("Please upload image")
+          return
+        };
+
         const formData = {
           name,
           sku:generateSku(category),
@@ -58,14 +65,21 @@ const AddProduct = () => {
           regularPrice,
           price,
           description,
-          //images
+          image:files
         };
         //console.log(formData)
         // console.log(product);
         // console.log(description);
         await dispatch(createProduct(formData));
-        // navigate("/admin/all-products")
+        
     };
+
+    useEffect(()=>{
+      if(message==="Product created successfully"){
+        navigate("/admin/all-products");
+      }
+      dispatch(productActions.RESET_PRODUCT())
+    },[dispatch,message,navigate])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

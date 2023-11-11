@@ -7,6 +7,7 @@ import authService from "./authService";
 import { toast } from "react-toastify";
 import categoryAndBrandService from "./CatAndBrandService";
 import productSlice from "./products/productIndex";
+import couponSlice from "./coupon/couponIndex";
 
 //======================================
 //                                  AUTH SLICE
@@ -523,7 +524,7 @@ const brandSlice = createSlice({
 })
 
 const store = configureStore({
-  reducer: { auth: authSlice.reducer, category:categorySlice.reducer, brand:brandSlice.reducer,product:productSlice.reducer },
+  reducer: { auth: authSlice.reducer, category:categorySlice.reducer, brand:brandSlice.reducer,product:productSlice.reducer,coupon:couponSlice.reducer },
 });
 
 export const authActions = authSlice.actions;

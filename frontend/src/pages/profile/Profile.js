@@ -17,6 +17,7 @@ const url = "https://api.cloudinary.com/v1_1/dqvlr5gux/image/upload"
 
 const Profile = () => {
   const { isLoading, user } = useSelector((state) => state.auth);
+  console.log(user)
 
   const initialState = {
     name: user?.name || "",

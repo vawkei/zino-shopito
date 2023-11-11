@@ -37,7 +37,7 @@ const createProduct = async (req, res) => {
     res.status(201).json({ msg: "Product created", product });
     // res.send("<h1>Create product route</h1>");
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({msg:error.message});
   }
 };
 
@@ -51,7 +51,7 @@ const getProducts = async (req, res) => {
 
     //res.send("<h1>Get Products</h1>")
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({msg:error.message});
   }
 };
 
@@ -94,7 +94,7 @@ const deleteProduct = async (req, res) => {
     if (error.name === "CastError" && error.kind === "ObjectId") {
       return res.status(404).json(`No product with id: ${productId}`);
     }
-    res.status(500).json(error);
+    res.status(500).json({msg:error.message});
   }
 
   //res.send("<h1>Delete product route</h1>")
@@ -166,7 +166,7 @@ const reviewProduct = async (req, res) => {
     product.save();
     res.status(201).json({ msg: "Product review has been added" });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({msg:error.message});
   }
 
   //res.send("<h1>Review product route</h1>");
@@ -195,7 +195,7 @@ const deleteReview = async (req, res) => {
 
     res.status(200).json({ msg: "Product review deleted" });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({msg:error.message});
   }
   //res.send("<h1>Delete review route</h1>");
 };

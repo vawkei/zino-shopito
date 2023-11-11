@@ -26,7 +26,7 @@ const ProductSchema = mongoose.Schema(
     color: {
       type: String,
       trim: true,
-      required: [true, "Please add a color"],
+      //required: [true, "Please add a color"],
       default: "As seen",
     },
     quantity: {

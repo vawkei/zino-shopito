@@ -6,6 +6,7 @@ import { useState } from "react";
 import {useDispatch,useSelector} from 'react-redux';
 import { authActions, logout } from "../../../store";
 import { UserName } from "../../../pages/profile/Profile";
+import { AdminOnlyLink } from "../../admin/hideAdmin/AdminOnlyRoute";
 
 
 export const logo = (
@@ -89,11 +90,15 @@ const MainNavigation = () => {
                 Shop
               </NavLink>
             </li>
+            
             <li>
+            <AdminOnlyLink>
               <NavLink to={"/admin/home"} className={navDataHandler}>
                 | Admin
               </NavLink>
+              </AdminOnlyLink>
             </li>
+            
           </ul>
           <div className={classes["header-right"]}>
             <span className={classes.links}>

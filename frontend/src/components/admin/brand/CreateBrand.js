@@ -19,7 +19,7 @@ const CreateBrand = (props) => {
   const saveBrand = async (e) => {
     e.preventDefault();
         
-    if(name.length <3){
+    if(name.length <2){
       return toast.error("name must be up to 3 characters")
     };
     if(!category){

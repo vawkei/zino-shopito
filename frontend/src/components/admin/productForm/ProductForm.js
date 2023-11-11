@@ -6,6 +6,7 @@ import { getBrands, getCategories } from "../../../store";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import UploadWidget from "./UploadWidget";
+import { BsTrash } from "react-icons/bs";
 
 const ProductForm = (props) => {
   const dispatch = useDispatch();
@@ -15,12 +16,37 @@ const ProductForm = (props) => {
     dispatch(getBrands());
   }, [dispatch]);
 
+
+  const removeImage =(image)=>{
+    props.setFiles(props.files.filter((img)=>{
+     return  img !== image
+    }))
+  }
+
   return (
     <div className="add-product">
       <UploadWidget files={props.files} setFiles={props.setFiles} />
       <Card className="card">
         <br />
         <form onSubmit={props.saveProduct}>
+          <label htmlFor="">Product Images:</label>
+          <div className="slide-container">
+            <aside>
+              {props.files.length > 0  && props.files.map((image)=>{
+                return(
+                  <div className="thumbnail" key={image}>
+                    <img  src={image} alt="product image" height={100}/>
+                    <div>
+                      <BsTrash size={25} className="thumbnailIcon" onClick={()=>removeImage(image)}/>
+                    </div>
+                  </div>
+                )
+              })}
+              {props.files.length < 1  && (
+                <p className="--m">No image set for this product</p>
+              )}
+            </aside>
+          </div>
           <label htmlFor="">Product Name:</label>
           <input
             type="text"

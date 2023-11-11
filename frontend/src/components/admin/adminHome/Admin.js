@@ -7,7 +7,7 @@ import Brand from "../brand/Brand";
 import AddProduct from "../addProduct/AddProduct";
 import ViewProducts from "../viewProducts/ViewProducts";
 import EditProduct from "../editProduct/EditProduct";
-
+import Coupon from "../coupon/Coupon";
 const Admin = () => {
   return (
     <div className={classes.admin}>
@@ -22,7 +22,8 @@ const Admin = () => {
           
           <Route path="add-product" element={<AddProduct />} />
           <Route path="all-products" element={<ViewProducts />} />
-          <Route path="edit-products/:id" element={<EditProduct />} />
+          <Route path="coupon" element={<Coupon />} />
+          <Route path="edit-product/:id" element={<EditProduct />} />
         </Routes>
       </div>
     </div>

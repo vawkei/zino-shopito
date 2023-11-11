@@ -35,6 +35,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to={"/admin/coupon"} className={navDataHandler}>
+              Coupon
+            </NavLink>
+          </li>
+          <li>
             <NavLink to={"/admin/category"} className={navDataHandler}>
               Category
             </NavLink>

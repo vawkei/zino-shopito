@@ -6,9 +6,13 @@ const createCoupon = async (req, res) => {
   if (!name || !discount || !expiresAt) {
     return res.status(400).json({ msg: "Please fill in fields" });
   }
-
+try{
   const coupon = await Coupon.create({ name, discount, expiresAt });
   res.status(201).json({ msg: "Coupon created", coupon });
+}catch(error){
+  res.status(500).json({msg: error.message})
+};
+
 };
 
 //getCoupons:
@@ -27,7 +31,6 @@ const getCoupons = async (req, res) => {
 
 //getSingleCoupon:
 const getSingleCoupon = async (req, res) => {
-  const couponId = req.params.id;
 
   try {
     const coupon = await Coupon.findOne({
@@ -38,10 +41,10 @@ const getSingleCoupon = async (req, res) => {
     if (!coupon) {
       return res.status(404).json({ msg: "Coupon not found or expired" });
     }
-    res.status(200).json(coupon);
+    res.status(200).json({coupon,msg:"Coupon added successfully"});
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json(error); 
   }
 };
 
@@ -59,7 +62,7 @@ const deleteCoupon = async (req, res) => {
     res.status(200).json({msg:"Coupon deleted"})
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json(error.name);
   }
 
   //res.send("Delete coupon route")
