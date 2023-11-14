@@ -14,6 +14,8 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminOnlyRoute from "./components/admin/hideAdmin/AdminOnlyRoute";
 import NotFound from "./pages/404/NotFound";
 import ShopPage from "./pages/shopPage/ShopPage";
+import ProductDetails from "./components/shop/productDetails/ProductDetails";
+import CartPage from "./pages/cartPage/CartPage";
 
 function App() {
   axios.defaults.withCredentials = true; //so everytime we make a http request with axios and we need to send a token or credential, it will be set to true automatically. And we ll be able to make the request. so theres no need to add it to every http request we make.
@@ -40,6 +42,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/product-details/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<CartPage />} />
 
         <Route
           path="/admin/*"

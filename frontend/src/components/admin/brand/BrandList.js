@@ -58,7 +58,7 @@ const BrandList = () => {
               </tr>
             </thead>
             <tbody>
-              {brands.length > 1 && brands.map((brand, index) => {
+              {brands.length > 0 && brands.map((brand, index) => {
                 return (
                   <tr key={brand._id}>
                     <td>{index + 1}</td>

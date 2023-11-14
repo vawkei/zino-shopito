@@ -84,6 +84,19 @@ const productSlice = createSlice({
             state.isLoading = false;
             state.message = "";
           },
+          GET_PRICE_RANGE(state,action){
+            const {products} = action.payload;
+            let array = []
+            products.map((product)=>{
+                const price = product.price
+                return array.push(price)
+            })
+            const max = Math.max(...array)
+            const min = Math.min(...array)
+
+            state.maxPrice = max;
+            state.minPrice = min
+          }
     },
     extraReducers(builder){
         builder
@@ -151,7 +164,7 @@ const productSlice = createSlice({
             state.isError=false;
             state.isSuccess=true;
             state.product=action.payload; // to store the product we requested
-            console.log(action.payload);
+            //console.log(action.payload);
         })
         .addCase(getSingleProduct.rejected,(state,action)=>{
             state.isLoading=false;
