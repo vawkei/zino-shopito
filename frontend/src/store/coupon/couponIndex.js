@@ -70,7 +70,11 @@ export const deleteCoupon = createAsyncThunk(
 const couponSlice = createSlice({
   name: "coupon",
   initialState: initialCouponState,
-  reducers: {},
+  reducers: {
+    REMOVE_COUPON(state){
+      state.coupon=null;
+    }
+  },
   extraReducers(builder){
     builder
     //createCoupon:
@@ -116,8 +120,8 @@ const couponSlice = createSlice({
       state.isLoading=false;
       state.isSuccess=true;
       state.coupon=action.payload.coupon;
-      //console.log(action.payload);
-      //toast.success(action.payload)
+      console.log(action.payload.msg);
+      toast.success(action.payload.msg)
     })
     .addCase(getSingleCoupon.rejected,(state,action)=>{
       state.isLoading=false;

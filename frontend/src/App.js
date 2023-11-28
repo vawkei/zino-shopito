@@ -16,6 +16,15 @@ import NotFound from "./pages/404/NotFound";
 import ShopPage from "./pages/shopPage/ShopPage";
 import ProductDetails from "./components/shop/productDetails/ProductDetails";
 import CartPage from "./pages/cartPage/CartPage";
+import CheckoutDetailsPage from "./pages/CheckoutDetailsPage";
+import Checkout from "./components/checkout/Checkout";
+import CheckoutSuccessPage from "./pages/checkoutSuccessPage/CheckoutSuccessPage";
+import OrderDetailsPage from "./pages/orderDetailsPage/OrderDetailsPage";
+import OrderHistoryPage from "./pages/orderHistoryPage/OrderHistoryPage";
+import CheckoutWithFlutterwave from "./components/checkout/checkoutWithFlutterwave/CheckoutWithFlutterwave";
+import CheckoutWithPaypal from "./components/checkout/checkoutWithPaypal/CheckoutWithPaypal";
+
+import WalletPage from "./pages/walletPage/WalletPage";
 
 function App() {
   axios.defaults.withCredentials = true; //so everytime we make a http request with axios and we need to send a token or credential, it will be set to true automatically. And we ll be able to make the request. so theres no need to add it to every http request we make.
@@ -53,6 +62,14 @@ function App() {
             </AdminOnlyRoute>
           }
         />
+        <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
+        <Route path="/order-history" element={<OrderHistoryPage />} />
+        <Route path="/order-details/:id" element={<OrderDetailsPage />} />
+        <Route path="/checkout-details" element={<CheckoutDetailsPage />} />
+        <Route path="/checkout-stripe" element={<Checkout />} />
+        <Route path="/checkout-flutterwave" element={<CheckoutWithFlutterwave />} />
+        <Route path="/checkout-paypal" element={<CheckoutWithPaypal />} />
+        <Route path="/wallet" element={<WalletPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

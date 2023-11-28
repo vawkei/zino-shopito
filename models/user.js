@@ -38,10 +38,21 @@ const UserSchema = mongoose.Schema(
       type: String,
       default: "+234",
     },
+    balance:{
+      type:Number,
+      default:0 //note: went to the mongodb to change it frm 0 to 100 in the user who he was presently loggedinto, mine was admin.
+    },
     address: {
       type: Object,
       // address,state,country
     },
+    cartItems:{
+      type:[Object]
+    },
+    stripeCustomerId:{
+      type:String
+    },
+    
   },
   { timestamp: true }
 );

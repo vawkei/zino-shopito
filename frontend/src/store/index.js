@@ -10,6 +10,9 @@ import productSlice from "./products/productIndex";
 import couponSlice from "./coupon/couponIndex";
 import filterSlice from "./products/filterSlice";
 import cartSlice from "./cart/cartIndex";
+import checkoutSlice from "./checkout/CheckoutIndex";
+import orderSlice from "./order/orderIndex";
+import transactionSlice from "./transaction/transactionIndex";
 
 //======================================
 //                                  AUTH SLICE
@@ -548,7 +551,10 @@ const store = configureStore({
     product: productSlice.reducer,
     coupon: couponSlice.reducer,
     filter: filterSlice.reducer,
-    cart: cartSlice.reducer
+    cart: cartSlice.reducer,
+    checkout: checkoutSlice.reducer,
+    order:orderSlice.reducer,
+    transaction:transactionSlice.reducer
   },
 });
 

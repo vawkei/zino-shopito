@@ -2,11 +2,12 @@ import classes from "./MainNavigation.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {useDispatch,useSelector} from 'react-redux';
 import { authActions, logout } from "../../../store";
 import { UserName } from "../../../pages/profile/Profile";
 import { AdminOnlyLink } from "../../admin/hideAdmin/AdminOnlyRoute";
+import { cartActions } from "../../../store/cart/cartIndex";
 
 
 export const logo = (
@@ -24,9 +25,15 @@ const MainNavigation = () => {
   const [scrollPage,setScrollPage] = useState(false);
 
   const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+  const { cartItems } = useSelector((state) => state.cart);
+  const {cartTotalQuantity} = useSelector((state)=>state.cart);
 
   const navigate =useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(cartActions.CALCULATE_TOTAL_QUANTITY())
+  },[dispatch,cartItems]);
 
   const fixedNavBar =()=>{
     if(window.scrollY >50){
@@ -56,7 +63,7 @@ const MainNavigation = () => {
       <Link to={"/cart"}>
         Cart
         <FaShoppingCart size={20} />
-        <p>0</p>
+        <p>{cartTotalQuantity}</p>
       </Link>
     </span>
   );

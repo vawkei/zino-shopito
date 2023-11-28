@@ -41,7 +41,7 @@ const getSingleCoupon = async (req, res) => {
     if (!coupon) {
       return res.status(404).json({ msg: "Coupon not found or expired" });
     }
-    res.status(200).json({coupon,msg:"Coupon added successfully"});
+    res.status(200).json({coupon,msg:"Coupon applied successfully"});
   } catch (error) {
     console.log(error);
     res.status(500).json(error); 

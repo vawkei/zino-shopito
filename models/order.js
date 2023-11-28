@@ -30,18 +30,19 @@ const orderSchema = mongoose.Schema({
         trim:true
     },
     cartItems:{
-        type:String,
-        //type:[object], start as string for testing, then he changed it later
+        //type:String,
+        type:[Object], //start as string for testing, then he changed it later
         required:[true]
     },
     shippingAddress:{
-        type:String,
+        //type:String,
         //type:Object,start as string for testing, then he changed it later
+        type:Object,
         required:true
     },
     coupon:{
         type:Object,
-        required:true,
+        //required:true,
         default:{
             name:"nill"
         }

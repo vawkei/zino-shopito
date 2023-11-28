@@ -42,4 +42,14 @@ export function calculateAverageRatings(ratings){
 export const getCartQuantityById = (product, id) => {
     const foundProduct = product.find(item => item._id === id);
     return foundProduct ? foundProduct.cartQuantity : 0;
+};
+
+//EXTRACT ID AND CART QUANTITY FROM CARTITEMS:
+export const extractIdAndCartQuantity = (cartItems)=>{
+    return cartItems.map((item)=>{
+     return {
+        _id:item._id,
+        cartQuantity:item.cartQuantity
+     }  
+    })
 }

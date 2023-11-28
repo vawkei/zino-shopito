@@ -37,7 +37,7 @@ const register = async (req, res) => {
         httpOnly: true,
         expires: new Date(Date.now() + oneDay),
         // secure:true,
-        // samesite:none
+        // sameSite:"none"
       });
       //send user data:
       return res.status(201).json({ _id, name, email, role, token });
@@ -96,7 +96,7 @@ const login = async (req, res) => {
         httpOnly: true,
         expires: new Date(Date.now() + oneDay),
         // secure:true,
-        // samesite:none
+        // sameSite:"none"
       });
       res.status(201).json(newUser);
     }
@@ -112,6 +112,8 @@ const logout = async (req, res) => {
     path: "/",
     httpOnly: true,
     expires: new Date(0),
+    // secure:true,
+    // sameSite:"none"
   });
   res.status(200).json({ msg: "User logged out successfully" });
   // res.send("<h1>Logout Route</h1>")
@@ -119,7 +121,7 @@ const logout = async (req, res) => {
 
 const getUser = async (req, res) => {
   const user = await User.findById(req.user.userId).select("-password");
-  console.log(user);
+  //console.log(user);
   if (user) {
     return res.status(200).json(user);
   } else {
@@ -167,7 +169,6 @@ const updateUser = async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-
 };
 
 const updatePhoto = async (req, res) => {
@@ -187,6 +188,47 @@ const updatePhoto = async (req, res) => {
   // res.send("<h1>UpdatePhoto</h1>")
 };
 
+//saveCart:
+
+const saveCart = async (req, res) => {
+  const { cartItems } = req.body;
+  const userId = req.user.userId;
+
+  try {
+    const user = await User.findOne({ _id: userId });
+    console.log(user);
+
+    if (user) {
+      user.cartItems = cartItems;
+      await user.save();
+      res
+        .status(200)
+        .json({ msg: "Cart saved to DB", userItems: user.cartItems });
+      //console.log(user)
+    } else {
+      return res.status(404).json({ msg: "User not found." });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+
+//getCart:
+const getCart = async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (!user) {
+      return res.status(404).json("user not found.");
+    }
+    res.status(200).json(user.cartItems);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -195,5 +237,6 @@ module.exports = {
   getLoginStatus,
   updateUser,
   updatePhoto,
+  saveCart,
+  getCart,
 };
-

@@ -8,6 +8,8 @@ import AddProduct from "../addProduct/AddProduct";
 import ViewProducts from "../viewProducts/ViewProducts";
 import EditProduct from "../editProduct/EditProduct";
 import Coupon from "../coupon/Coupon";
+import Orders from "../orders/Orders";
+import OrderDetails from "../orders/OrderDetails";
 const Admin = () => {
   return (
     <div className={classes.admin}>
@@ -23,6 +25,10 @@ const Admin = () => {
           <Route path="add-product" element={<AddProduct />} />
           <Route path="all-products" element={<ViewProducts />} />
           <Route path="coupon" element={<Coupon />} />
+
+          <Route path="orders" element={<Orders />} />
+          <Route path="order-details/:id" element={<OrderDetails />} />
+
           <Route path="edit-product/:id" element={<EditProduct />} />
         </Routes>
       </div>

@@ -22,12 +22,16 @@ const categoryRoute  = require("./routes/categoryRoute");
 const brandRoute = require("./routes/brandRoute");
 const couponRoute =require("./routes/couponRoute");
 const orderRoute =require("./routes/orderRoute");
+const transactionRoute=require("./routes/transactionRoute");
 
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 
 
-//middlewares:
-app.use(express.json());
+
+
+
+//==============================middlewares:
+
 app.use(cookieParser());
 app.use(express.urlencoded({extended:false}))
 app.use(cors({
@@ -38,6 +42,10 @@ app.use(cors({
 // The default options allow requests from any origin and don't set the credentials flag. In other words, it allows any website to make requests to your server, but it doesn't allow cookies, HTTP authentication[it does for the simplest ones], or other sensitive information to be sent with the requests.while app.use(cors()) might work for the Authorization header by default due to it being a simple request, it might not work for cookies until you specify credentials: true in your CORS options.
 
 
+app.use("/api/v1/transaction",transactionRoute);
+//note: we put the transactionRoute above the express.json() cuz we dont want the express.json() applied to it, since we will be using a webhook for the transactionRoute.
+
+app.use(express.json());
 
 //Routes:
 app.get("/", (req, res) => {
@@ -49,7 +57,8 @@ app.use("/api/v1/products",productRoute);
 app.use("/api/v1/category",categoryRoute);
 app.use("/api/v1/brand",brandRoute);
 app.use("/api/v1/coupon",couponRoute);
-app.use("/api/v1/order",orderRoute)
+app.use("/api/v1/order",orderRoute);
+
 
 app.use(errorHandlerMiddleware)
 
@@ -75,3 +84,6 @@ start();
 // app.listen(5000, "localhost", () => {
 //   console.log("Server listening on port 5000");
 // });
+
+
+

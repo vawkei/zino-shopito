@@ -5,9 +5,19 @@ import { calculateAverageRatings, shortenText } from "../../../utils";
 import { toast } from "react-toastify";
 import DOMPurify from "dompurify";
 import ProductRating from "../productRating/ProductRating";
+import { useDispatch } from "react-redux";
+import { cartActions, saveCartDB } from "../../../store/cart/cartIndex";
 
 const ProductItem = (props) => {
   const averageRating = calculateAverageRatings(props.ratings);
+  const dispatch = useDispatch();
+
+  const addToCart = (product) => {
+    dispatch(cartActions.ADD_TO_CART(product)); //this send the product and its properties to redux store.
+    dispatch(
+      saveCartDB({ cartItems: JSON.parse(localStorage.getItem("cartItems")) })
+    );
+  };
 
   return (
     <Card cardClass={props.grid ? `${classes.grid}` : `${classes.list}`}>
@@ -37,7 +47,11 @@ const ProductItem = (props) => {
               }}></div>
           )}
           {props.quantity > 0 ? (
-            <button className="--btn --btn-primary">Add To Cart</button>
+            <button
+              className="--btn --btn-primary"
+              onClick={() => addToCart(props.product)}>
+              Add To Cart
+            </button>
           ) : (
             <button
               className="--btn --btn-red"

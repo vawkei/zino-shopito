@@ -9,7 +9,7 @@ import { calculateAverageRatings, shortenText } from "../../../utils";
 import { toast } from "react-toastify";
 import DOMPurify from "dompurify";
 import Card from "../../ui/card/Card";
-import { cartActions } from "../../../store/cart/cartIndex";
+import { cartActions, saveCartDB } from "../../../store/cart/cartIndex";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -25,11 +25,11 @@ const ProductDetails = () => {
   const cart = cartItems.find((item) => {
     return item._id === id;
   });
-  console.log(cart); //if item/id is not in cart, it returns undefined. but if its in cart, it returns the complete object
+  //console.log(cart); //if item/id is not in cart, it returns undefined. but if its in cart, it returns the complete object
   const isCartAdded = cartItems.findIndex((item) => {
     return item._id === id;
   });
-  console.log(isCartAdded); //if item/id is not in cart, it returns -1.but if its in cart, it returns a number greater than 0
+  //console.log(isCartAdded); //if item/id is not in cart, it returns -1.but if its in cart, it returns a number greater than 0
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
@@ -56,11 +56,17 @@ const ProductDetails = () => {
 
   const averageRating = calculateAverageRatings(product?.ratings);
 
-  const addToCart = (product) => {
+  const addToCart =  (product) => {
     dispatch(cartActions.ADD_TO_CART(product)); //this send the product and its properties to redux store.
+    dispatch(
+      saveCartDB({ cartItems: JSON.parse(localStorage.getItem("cartItems")) })
+    );
   };
-  const revoveFromCart = (product) => {
+  const removeFromCart =  (product) => {
     dispatch(cartActions.DECREASE_CART(product));
+     dispatch(
+      saveCartDB({ cartItems: JSON.parse(localStorage.getItem("cartItems")) })
+    );
   };
 
   return (
@@ -150,7 +156,7 @@ const ProductDetails = () => {
                     <>
                       <button
                         className="--btn"
-                        onClick={() => revoveFromCart(product)}>
+                        onClick={() => removeFromCart(product)}>
                         -
                       </button>
                       <p>
