@@ -91,7 +91,6 @@ const updateProductQuantity =async (cartItems)=>{
 
 
 // // This is your Stripe CLI webhook secret for testing your endpoint locally.
-// const endpointSecret = "whsec_3b9bf03c9d3405909861117bc55b368a9d342751e6a8a98f163f7276dde120a0";
 
 // app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
 //   const sig = request.headers['stripe-signature'];
