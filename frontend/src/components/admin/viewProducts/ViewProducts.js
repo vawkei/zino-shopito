@@ -21,7 +21,7 @@ const ViewProducts = () => {
   console.log(products);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn===true && products.length===0) {
       dispatch(getProducts());
     }
   }, [isLoggedIn, dispatch]);

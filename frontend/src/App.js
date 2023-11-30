@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getloginstatus, getuser } from "./store";
+import { getloginstatus, getuser } from "./store/auth/authIndex";
 import Profile from "./pages/profile/Profile";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminOnlyRoute from "./components/admin/hideAdmin/AdminOnlyRoute";

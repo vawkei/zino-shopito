@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./VerifyCoupon.scss";
 import { useState } from "react";
-import { couponActions, deleteCoupon, getSingleCoupon } from "../../store/coupon/couponIndex";
+import { couponActions, getSingleCoupon } from "../../store/coupon/couponIndex";
 import CartDiscount from "./CartDiscount";
 import { toast } from "react-toastify";
 

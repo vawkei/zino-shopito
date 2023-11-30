@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { validateEmail } from "../../utils";
 
 import { useDispatch, useSelector } from "react-redux";
-import { authActions, register } from "../../store";
+import { authActions, register } from "../../store/auth/authIndex";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 

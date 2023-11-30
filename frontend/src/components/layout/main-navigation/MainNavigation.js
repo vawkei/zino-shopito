@@ -4,7 +4,7 @@ import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import {useDispatch,useSelector} from 'react-redux';
-import { authActions, logout } from "../../../store";
+import { authActions, logout } from "../../../store/auth/authIndex";
 import { UserName } from "../../../pages/profile/Profile";
 import { AdminOnlyLink } from "../../admin/hideAdmin/AdminOnlyRoute";
 import { cartActions } from "../../../store/cart/cartIndex";

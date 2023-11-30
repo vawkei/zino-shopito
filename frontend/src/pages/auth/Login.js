@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 import { validateEmail } from "../../utils";
 import Loader from "../../components/loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions, login } from "../../store";
-import { cartActions, getCartDB, saveCartDB } from "../../store/cart/cartIndex";
+import { authActions, login } from "../../store/auth/authIndex";
+import {  getCartDB, saveCartDB } from "../../store/cart/cartIndex";
 
 const Login = () => {
   const [email, setEmail] = useState("");

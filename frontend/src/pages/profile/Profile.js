@@ -3,7 +3,7 @@ import PageMenu from "../../components/pageMenu/PageMenu";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/ui/card/Card";
-import { getuser, updatephoto, updateuser } from "../../store";
+import { getuser, updatephoto, updateuser } from "../../store/auth/authIndex";
 import Loader from "../../components/loader/Loader";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -243,7 +243,7 @@ const Profile = () => {
 export const UserName = ()=>{
     
   
-  const { isLoading, user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
 
   const userName = user?.name || "..." 

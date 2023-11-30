@@ -2,7 +2,7 @@ import "./Wallet.scss";
 import PageMenu from "../../components/pageMenu/PageMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getuser } from "../../store";
+import { getuser } from "../../store/auth/authIndex";
 import mcImg from "../../assets/mc_symbol.png";
 import { AiFillGift, AiOutlineDollarCircle } from "react-icons/ai";
 import { FaRegPaperPlane } from "react-icons/fa";
@@ -88,7 +88,7 @@ const Wallet = () => {
   const [showDepositModal, setShowDepositModal] = useState(false);
 
   const [transferData, setTransferData] = useState(initialState);
-  const { amount, sender, receiver, description, status } = transferData;
+  const { amount,  receiver, description,  } = transferData;
 
   const [depositData, setDepositData] = useState(initialDepositState);
   const { depositAmount, paymentMethod } = depositData;
