@@ -228,9 +228,9 @@ const brandSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createBrand.fulfilled, (state, action) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.isSuccess = true;
-        state.brands = action.payload;
+        //state.brands = action.payload;
         console.log(action.payload);
         toast.success(action.payload.msg);
       })

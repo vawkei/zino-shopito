@@ -11,13 +11,6 @@ router.delete("/:slug",authenticateUser,adminOnly, deleteCategory)
 module.exports = router;
 
 
-
-// {
-//     "email":"admin@gmail.com",
-//     "password":"bernard"
-// }
-
-
 // {
 //     "orderDate":"Mon 3rd Dec,202",
 //     "orderTime":"9:00am",
